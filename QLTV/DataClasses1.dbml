@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QL_Thu_Vien" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-E80VHGI\QUAN;Initial Catalog=QL_Thu_Vien;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="QLTV.Properties.Settings" SettingsPropertyName="QL_Thu_VienConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.dausach" Member="dausaches">
+    <Type Name="dausach">
+      <Column Name="ma_dausach" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ten_dausach" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="so_luong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ten_tacgia" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="theloai" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="soluongconlai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="dausach_hoadon_thue" Member="hoadon_thues" ThisKey="ma_dausach" OtherKey="id_dausach" Type="hoadon_thue" />
+      <Association Name="dausach_sach" Member="saches" ThisKey="ma_dausach" OtherKey="id_dausach" Type="sach" />
+    </Type>
+  </Table>
+  <Table Name="dbo.hoadon_thue" Member="hoadon_thues">
+    <Type Name="hoadon_thue">
+      <Column Name="id_hoadon_thue" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ngay_thue" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="id_dausach" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_khachhang" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gia_thue" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="tien_coc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="hoadon_thue_hoadon_tra" Member="hoadon_tras" ThisKey="id_hoadon_thue" OtherKey="id_hoadon_thue" Type="hoadon_tra" />
+      <Association Name="dausach_hoadon_thue" Member="dausach" ThisKey="id_dausach" OtherKey="ma_dausach" Type="dausach" IsForeignKey="true" />
+      <Association Name="khachhang_hoadon_thue" Member="khachhang" ThisKey="id_khachhang" OtherKey="ma_khachhang" Type="khachhang" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.hoadon_tra" Member="hoadon_tras">
+    <Type Name="hoadon_tra">
+      <Column Name="id_hoadon_tra" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ngay_tra" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="id_hoadon_thue" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="hoadon_thue_hoadon_tra" Member="hoadon_thue" ThisKey="id_hoadon_thue" OtherKey="id_hoadon_thue" Type="hoadon_thue" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.khachhang" Member="khachhangs">
+    <Type Name="khachhang">
+      <Column Name="ma_khachhang" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ten_khachhang" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="so_dienthoai" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Association Name="khachhang_hoadon_thue" Member="hoadon_thues" ThisKey="ma_khachhang" OtherKey="id_khachhang" Type="hoadon_thue" />
+    </Type>
+  </Table>
+  <Table Name="dbo.nguoidung" Member="nguoidungs">
+    <Type Name="nguoidung">
+      <Column Name="id_nguoidung" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tendangnhap" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="matkhau" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="nguoidung_vaiTro" Member="vaiTros" ThisKey="id_nguoidung" OtherKey="id_nguoidung" Type="vaiTro" />
+    </Type>
+  </Table>
+  <Table Name="dbo.nhanvien" Member="nhanviens">
+    <Type Name="nhanvien">
+      <Column Name="ma_nhanvien" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ten_nhanvien" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="so_dienthoai" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="dia_chi" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="gioitinh" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sach" Member="saches">
+    <Type Name="sach">
+      <Column Name="id_sach" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Trangthai" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="id_dausach" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="dausach_sach" Member="dausach" ThisKey="id_dausach" OtherKey="ma_dausach" Type="dausach" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vaiTro" Member="vaiTros">
+    <Type Name="vaiTro">
+      <Column Name="id_vaitro" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tenVaiTro" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="id_nguoidung" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="nguoidung_vaiTro" Member="nguoidung" ThisKey="id_nguoidung" OtherKey="id_nguoidung" Type="nguoidung" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
